@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<p:dialog modal="true" showEffect="fade" hideEffect="fade"
+		header="#{productoController.estActualizar eq 'true' ? 'Actualizar producto' : 'Ingresar producto'}" width="70%" draggable="true" onShow="removeClass()"
+		widgetVar="dlgIngresoProducto" resizable="false" dynamic="true">
+		<h:form id="frIngresoProducto">
+			<p:panel widgetVar="pnIngresoProducto">
+				<script type="text/javascript">
+					function removeClass(){
+						$("input").removeClass( "ui-state-error" )
+						$("div").removeClass( "ui-state-error" )
+						$("label").removeClass( "ui-state-error" )
+						$("textarea").removeClass( "ui-state-error" )
+					}
+				</script>
+				<p:messages id="msgIngresoProducto" autoUpdate="true" closable="true"/>
+				<p:panelGrid style="width: 100%">
+					<p:row>
+						<p:column style="width: 130px">
+							<h:outputLabel for="txtNomCodigo" value="Codigo: *" />
+						</p:column>
+						<p:column style="width: 150px">
+							<p:inputText id="txtNomCodigo" style="width: 90%" required="true"
+								value="#{productoController.productoInsertar.nomCodigo}" />
+						</p:column>
+						<p:column style="width: 130px">
+							<h:outputLabel for="txtNomProducto" value="Producto: *" />
+						</p:column>
+						<p:column>
+							<p:inputText id="txtNomProducto" style="width: 89%" required="true"
+								value="#{productoController.productoInsertar.nomProducto}" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+							<h:outputLabel for="txtNumValor" value="Costo unitario $: *" />
+						</p:column>
+						<p:column>
+							<p:inputText id="txtNumValor" style="width: 89%" required="true"
+								value="#{productoController.productoInsertar.numValor}" />
+						</p:column>
+						<p:column>
+							<h:outputLabel for="txtNumStock" value="Stock: *" />
+						</p:column>
+						<p:column>
+							<p:inputText id="txtNumStock" style="width: 89%" required="true"
+								value="#{productoController.productoInsertar.numStock}" />
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column>
+							<h:outputLabel for="txtDescripcion" value="Descripcion: *" />
+						</p:column>
+						<p:column colspan="3">
+							<p:inputTextarea id="txtDescripcion" style="width: 94%"
+								value="#{productoController.productoInsertar.txtDescripcion}" >
+							</p:inputTextarea>
+						</p:column>
+					</p:row>
+				</p:panelGrid>
+				<f:facet name="footer">
+					<p:commandButton id="btGuardar" icon="ui-icon-check"
+						rendered="#{!productoController.estActualizar}"
+						style="margin-left:5px;" value="Guardar" 
+						actionListener="#{productoController.guardarProducto}"
+						update="@widgetVar(pnProducto)">
+					</p:commandButton>
+					<p:commandButton id="btActualizar" icon="ui-icon-check"
+						rendered="#{productoController.estActualizar}"
+						style="margin-left:5px;" value="Actualizar" 
+						actionListener="#{productoController.actualizarProducto}"
+						update="@widgetVar(pnProducto)">
+					</p:commandButton>
+					<p:commandButton id="btCancelar" value="Cancelar" icon="ui-icon-cancel"
+						process="@this" oncomplete="PF('dlgIngresoProducto').hide()" />
+				</f:facet>
+			</p:panel>
+		</h:form>
+	</p:dialog>
+</ui:composition>
+</html>

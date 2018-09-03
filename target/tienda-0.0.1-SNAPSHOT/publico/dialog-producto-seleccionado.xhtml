@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<p:dialog modal="true" showEffect="fade" hideEffect="fade"
+		header="Productos seleccionados" width="70%" draggable="true" onShow="removeClass()"
+		widgetVar="dlgProductoSeleccionado" resizable="false" dynamic="true">
+		<h:form id="frProductoSeleccionado">
+			<p:panel widgetVar="pnProductoSeleccionado">
+				<script type="text/javascript">
+					function removeClass(){
+						$("input").removeClass( "ui-state-error" )
+						$("div").removeClass( "ui-state-error" )
+						$("label").removeClass( "ui-state-error" )
+						$("textarea").removeClass( "ui-state-error" )
+					}
+				</script>
+				<p:dataTable var="pro_" value="#{productoDataManager.listaProductoSeleccionado}">
+					<p:column headerText="Codigo">
+						<h:outputText value="#{pro_.nomCodigo}" title="#{pro_.txtDescripcion}"/>
+					</p:column>
+					<p:column headerText="Producto">
+						<h:outputText value="#{pro_.nomProducto}" />
+					</p:column>
+					<p:column headerText="Costo unitario">
+						<h:outputText value="#{pro_.numValor}">
+							<f:convertNumber currencySymbol="$" type="currency" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Cantidad">
+						<h:outputText value="#{pro_.numCantidad}" />
+					</p:column>
+					<p:column headerText="Total" style="text-align:center">
+						<h:outputText value="#{pro_.numTotal}">
+							<f:convertNumber currencySymbol="$" type="currency" />
+						</h:outputText>
+					</p:column>
+					<p:columnGroup type="footer">
+						<p:row>
+							<p:column colspan="4" style="text-align:right" footerText="Total a Pagar:" />
+							<p:column footerText="$#{productoSeleccionadoController.totalPagar}" />
+						</p:row>
+					</p:columnGroup>
+				</p:dataTable>
+				<f:facet name="footer">
+					<p:commandButton id="btAceptar" value="Aceptar" icon="ui-icon-check"
+						process="@this" oncomplete="PF('dlgProductoSeleccionado').hide()" />
+					<p:commandButton id="btCancelarCompra" icon="ui-icon-cancel"
+						style="margin-left:5px;" value="Cancelar la compra" 
+						actionListener="#{productoSeleccionadoController.cancelarCompra}"
+						update="@widgetVar(pnProducto)">
+					</p:commandButton>
+				</f:facet>
+			</p:panel>
+		</h:form>
+	</p:dialog>
+</ui:composition>
+</html>

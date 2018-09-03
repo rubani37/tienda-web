@@ -1,0 +1,21 @@
+
+.ui-panelgrid td, .ui-panelgrid tr {
+    border-style: none !important;
+    padding: 3px 5px !important;
+}
+
+.ui-widget {
+	font-size: 12px;
+}
+
+.ui-widget .ui-widget {
+	font-size: 12px;
+}
+
+input:FOCUS {
+	background-color: #FFFFBF !important;
+}
+
+.font-size-tabla {
+    font-size: 10px !important;
+}

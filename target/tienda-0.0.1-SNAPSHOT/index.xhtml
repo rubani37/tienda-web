@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Tienda</title>
+	<h:outputStylesheet library="css" name="estilo.css" />
+</h:head>
+
+<h:body>
+	<h:form id="frIngreso">
+		<table align="center" width="100%">
+			<tr>
+				<td width="35%"></td>
+				<td>
+					<h:graphicImage width="70%" height="70%"
+						url="/resources/img/baymax.jpeg" />
+				</td>
+				<td width="35%"></td>
+			</tr>
+			<tr>
+				<td>
+				</td>
+				<td>
+					<p:panelGrid columns="2" style="width:100%;">
+						<p:commandButton value="Comprar" onclick="redirecPublico();"/>
+						<p:commandButton value="Administrar" onclick="redirectAdmin();"/>
+						<h:outputScript>
+								function redirecPublico(){
+									window.location = "publico/";
+								}
+								function redirectAdmin(){
+									window.location = "admin/";
+								}
+							</h:outputScript>
+					</p:panelGrid>
+				</td>
+				<td>
+				</td>
+			</tr>
+		</table>
+	</h:form>
+</h:body>
+</html>
